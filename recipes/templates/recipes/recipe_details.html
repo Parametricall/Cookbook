@@ -4,4 +4,9 @@
     <div class="container">
         {{ form }}
     </div>
+
+    {% for ingredient in ingredients %}
+        *{{ ingredient }}
+        <br/>
+    {% endfor %}
 {% endblock body %}
