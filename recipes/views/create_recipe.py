@@ -2,16 +2,16 @@ from django.shortcuts import render
 from django.views import View
 
 from ..models import Recipe
+from ..forms import CreateRecipeForm
 
 
-class LandingPage(View):
-    template_name = "recipes/landing_page.html"
-
+class CreateRecipe(View):
+    template_name = "recipes/create_recipe.html"
 
     def get(self, request):
-        recipes = Recipe.objects.all()
+        form = CreateRecipeForm()
 
         context = {
-            'recipes': recipes,
+            'form': form,
         }
         return render(request, self.template_name, context)
