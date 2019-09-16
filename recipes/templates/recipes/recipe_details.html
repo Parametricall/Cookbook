@@ -2,11 +2,17 @@
 
 {% block body %}
     <div class="container">
-        {{ form }}
-    </div>
-
+        <h2 style="text-align: center">{{ form.name.value }}</h2>
+        <h4>Ingredients</h4>
+    <ul class="collection">
+        {% for ingredient in ingredients %}
+            <li class="collection-item">{{ ingredient }}</li>
+        {% endfor %}
+    </ul>
+    <h4>Method</h4>
     {% for ingredient in ingredients %}
-        *{{ ingredient }}
-        <br/>
-    {% endfor %}
+            {{ forloop.counter }}. {{ ingredient }}
+            <br/>
+        {% endfor %}
+    </div>
 {% endblock body %}
