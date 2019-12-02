@@ -1,6 +1,6 @@
 [Secret Key]
 
-SECRET_KEY = "This is a random secret key"
+SECRET_KEY = This is a random secret key
 
 [DEBUG]
 
