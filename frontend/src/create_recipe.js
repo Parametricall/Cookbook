@@ -35,27 +35,105 @@ class Name extends React.Component {
 class Ingredients extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            ingredients: [
+                ""
+            ],
+        };
+
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange(e) {
+        let value = e.target.value;
+        let row_id = parseInt(e.target.id);
+        let name = e.target.name;
+
+        let ingredients = this.state.ingredients;
+        ingredients[row_id] = value;
+
+        if (row_id === ingredients.length -1) {
+            ingredients.push("")
+        }
+        this.props.get_data(name, ingredients);
+        this.setState({
+            ingredients: ingredients
+        });
+
     }
 
     render() {
+        let ingredients = this.state.ingredients;
+        let rows = [];
+        for (let i = 0; i < ingredients.length; i++) {
+            rows[i] = <input
+                key={i}
+                name="ingredients"
+                type="text"
+                value={ingredients[i]}
+                onChange={this.handleChange}
+                placeholder={"Add ingredient #" + (i+1)}
+                id={i}/>
+        }
+
         return (
-            <div className="bounding-box">
-                <input/>
-            </div>
+            <label>
+                Ingredients:
+                {rows}
+            </label>
         )
     }
 }
 
 class Method extends React.Component {
-    constructor(props) {
+     constructor(props) {
         super(props);
+        this.state = {
+            method: [
+                ""
+            ],
+        };
+
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange(e) {
+        let value = e.target.value;
+        let row_id = parseInt(e.target.id);
+        let name = e.target.name;
+
+        let method = this.state.method;
+        method[row_id] = value;
+
+        if (row_id === method.length -1) {
+            method.push("")
+        }
+        this.props.get_data(name, method);
+        this.setState({
+            method: method
+        });
+
     }
 
     render() {
+        let method = this.state.method;
+        let rows = [];
+        for (let i = 0; i < method.length; i++) {
+            rows[i] = <input
+                key={i}
+                name="method"
+                type="text"
+                value={method[i]}
+                onChange={this.handleChange}
+                placeholder={"Add method #" + (i+1)}
+                id={i}/>
+        }
+
         return (
-            <div className="bounding-box">
-                <input/>
-            </div>
+            <label>
+                Method:
+                {rows}
+            </label>
         )
     }
 }
@@ -65,12 +143,13 @@ class CreateRecipeForm extends React.Component {
         super(props);
         this.state = {
             name: "",
-            ingredients: "",
-            method: "",
+            ingredients: [],
+            method: [],
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.getData = this.getData.bind(this);
     }
 
     handleChange(event) {
@@ -94,15 +173,24 @@ class CreateRecipeForm extends React.Component {
             ingredients: this.state.ingredients,
             method: this.state.method,
         };
+        ret_data.ingredients.pop();
+        ret_data.method.pop();
         const data = await postData('', ret_data);
         window.location.href = data.url;
     };
+
+    getData(name, value) {
+        this.setState({
+            [name]: value
+        })
+    }
 
     render() {
         return (
             <div className="container">
                 <form onSubmit={this.handleSubmit} method="POST">
                     <label>
+                        Name:
                         <input
                             name="name"
                             type="text"
@@ -110,20 +198,16 @@ class CreateRecipeForm extends React.Component {
                             onChange={this.handleChange}/>
                     </label>
                     <br />
-                    <label>
-                        <input
-                            name="ingredients"
-                            type="text"
-                            value={this.state.ingredients}
-                            onChange={this.handleChange} />
-                    </label>
-                    <label>
-                        <input
-                            name="method"
-                            type="text"
-                            value={this.state.method}
-                            onChange={this.handleChange} />
-                    </label>
+                    <Ingredients get_data={this.getData}/>
+                    <Method get_data={this.getData}/>
+                    {/*<label>*/}
+                    {/*    Method:*/}
+                    {/*    <input*/}
+                    {/*        name="method"*/}
+                    {/*        type="text"*/}
+                    {/*        value={this.state.method}*/}
+                    {/*        onChange={this.handleChange} />*/}
+                    {/*</label>*/}
 
                     <button className="btn waves-effect waves-light" type="submit" name="action">
                         Submit
