@@ -4,13 +4,13 @@
     <div class="container">
         <h2 style="text-align: center">{{ name }}</h2>
         <h4>Ingredients</h4>
-    <ul class="collection">
-        {% for ingredient in ingredients %}
-            <li class="collection-item">{{ ingredient }}</li>
-        {% endfor %}
-    </ul>
-    <h4>Method</h4>
-    {% for instruction in method %}
+        <ul class="collection">
+            {% for ingredient in ingredients %}
+                <li class="collection-item">{{ ingredient }}</li>
+            {% endfor %}
+        </ul>
+        <h4>Method</h4>
+        {% for instruction in method %}
             {{ forloop.counter }}. {{ instruction }}
             <br/>
         {% endfor %}
