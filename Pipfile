@@ -7,7 +7,6 @@ verify_ssl = true
 
 [packages]
 django = "*"
-djangorestframework = "*"
 django-cors-headers = "*"
 django-webpack-loader = "*"
 

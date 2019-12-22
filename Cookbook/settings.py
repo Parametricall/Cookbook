@@ -48,7 +48,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'corsheaders',
-    'rest_framework',
     'recipes',
     'frontend',
     'webpack_loader',
@@ -119,9 +118,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en-au'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Australia/Brisbane'
 
 USE_I18N = True
 
@@ -137,15 +136,13 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 
 STATICFILES_DIR = (
-    os.path.join(BASE_DIR, 'frontend/assests'),
+    os.path.join(BASE_DIR, 'frontend/static/assets'),
 )
-
-
 
 WEBPACK_LOADER = {
     'DEFAULT': {
         'CACHE': not DEBUG,
-        'BUNDLE_DIR_NAME': 'assets/bundles/', # must end with slash
+        'BUNDLE_DIR_NAME': 'assets/bundles/',  # must end with slash
         'STATS_FILE': os.path.join(BASE_DIR, 'frontend/webpack-stats.json'),
         'POLL_INTERVAL': 0.1,
         'TIMEOUT': None,

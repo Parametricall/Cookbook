@@ -1,13 +1,12 @@
-var path = require('path');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var webpack = require('webpack');
-var BundleTracker = require('webpack-bundle-tracker');
+let path = require('path');
+let HtmlWebpackPlugin = require('html-webpack-plugin');
+let BundleTracker = require('webpack-bundle-tracker');
+require("regenerator-runtime/runtime");
 
 
 module.exports = {
     context: __dirname,
 
-    // entry: './src/index.js',
     entry: './src/create_recipe.js',
     output: {
         path: path.resolve('./static/assets/bundles/'),

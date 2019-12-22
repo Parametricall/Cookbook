@@ -1,3 +1,5 @@
+import json
+
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
@@ -5,18 +7,12 @@ from django.views import View
 
 from ..forms import CreateRecipeForm
 
-import json
-
 
 class CreateRecipe(View):
     template_name = "frontend/index.html"
 
     def post(self, request):
         body = json.loads(request.body)
-        name = body.get('name', "")
-        ingredients = body.get('ingredients', [])
-        method = body.get('method', "")
-
         form = CreateRecipeForm(body)
         if form.is_valid():
             form.save()
@@ -24,7 +20,6 @@ class CreateRecipe(View):
 
     def get(self, request):
         form = CreateRecipeForm()
-
         context = {
             'form': form,
         }

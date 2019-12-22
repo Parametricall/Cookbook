@@ -1,36 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
-const regeneratorRuntime = require("regenerator-runtime");
 import Cookies from 'js-cookie'
 import "materialize-css/dist/css/materialize.min.css";
+require("regenerator-runtime/runtime");
 
-
-class Name extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            name: props.name
-        };
-
-        this.handleChange = this.handleChange.bind(this)
-    }
-
-    handleChange(event) {
-        this.setState({
-            name: event.target.value
-        })
-    }
-
-    render() {
-        console.log("NAME: " + this.state.name);
-        return (
-            <div className="bounding-box">
-                <input type="text" value={this.state.name} onChange={this.handleChange}/>
-            </div>
-        )
-    }
-}
 
 class Ingredients extends React.Component {
     constructor(props) {
@@ -213,7 +186,7 @@ class CreateRecipeForm extends React.Component {
 
 async function postData(url = '', data = {}) {
 
-    var csrftoken = Cookies('csrftoken');
+    let csrftoken = Cookies('csrftoken');
     // Default options are marked with *
     const response = await fetch(url, {
         method: 'POST', // *GET, POST, PUT, DELETE, etc.

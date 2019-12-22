@@ -1,29 +1,29 @@
 {% extends 'recipes/base.html' %}
 
 {% block body %}
-<div class="fixed-action-btn">
-  <a class="btn-floating btn-large red" href="{% url 'recipes:Create Recipe' %}">
-    <i class="large material-icons">add</i>
-  </a>
-</div>
+    <div class="fixed-action-btn">
+        <a class="btn-floating btn-large red" href="{% url 'recipes:Create Recipe' %}">
+            <i class="large material-icons">add</i>
+        </a>
+    </div>
 
-<div class="container">
-    <table>
-        <thead>
-        <tr>
-            <th>Recipes</th>
-        </tr>
-        </thead>
-
-        <tbody>
-        {% for recipe in recipes %}
+    <div class="container">
+        <table>
+            <thead>
             <tr>
-                <td>
-                    <a href="{% url  'recipes:Recipe Details' recipe.id%}">{{ recipe.name }}</a>
-                </td>
+                <th>Recipes</th>
             </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-</div>
+            </thead>
+
+            <tbody>
+            {% for recipe in recipes %}
+                <tr>
+                    <td>
+                        <a href="{% url  'recipes:Recipe Details' recipe.id %}">{{ recipe.name }}</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock body %}
