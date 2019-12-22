@@ -200,14 +200,6 @@ class CreateRecipeForm extends React.Component {
                     <br />
                     <Ingredients get_data={this.getData}/>
                     <Method get_data={this.getData}/>
-                    {/*<label>*/}
-                    {/*    Method:*/}
-                    {/*    <input*/}
-                    {/*        name="method"*/}
-                    {/*        type="text"*/}
-                    {/*        value={this.state.method}*/}
-                    {/*        onChange={this.handleChange} />*/}
-                    {/*</label>*/}
 
                     <button className="btn waves-effect waves-light" type="submit" name="action">
                         Submit
@@ -220,21 +212,22 @@ class CreateRecipeForm extends React.Component {
 }
 
 async function postData(url = '', data = {}) {
+
+    var csrftoken = Cookies('csrftoken');
     // Default options are marked with *
     const response = await fetch(url, {
         method: 'POST', // *GET, POST, PUT, DELETE, etc.
-        mode: 'no-cors', // no-cors, *cors, same-origin
+        mode: 'cors', // no-cors, *cors, same-origin
         cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
         credentials: 'same-origin', // include, *same-origin, omit
         headers: {
-            'Content-Type': 'application/json'
-            // 'Content-Type': 'application/x-www-form-urlencoded',
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken
         },
         redirect: 'follow', // manual, *follow, error
         referrer: 'no-referrer', // no-referrer, *client
         body: JSON.stringify(data) // body data type must match "Content-Type" header
     });
-    let response2 = await response;
     console.log(response);
     return await response; // parses JSON response into native JavaScript objects
 }
