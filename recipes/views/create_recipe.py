@@ -23,7 +23,7 @@ class CreateRecipe(View):
     def post(self, request):
         body = json.loads(request.body)
         name = body.get('name', "")
-        ingredients = body.get('ingredients', "")
+        ingredients = body.get('ingredients', [])
         method = body.get('method', "")
 
 
