@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack",
-    "launch": "webpack-dev-server --open"
+    "build_prod": "webpack --config webpack.prod.js",
+    "launch": "webpack-dev-server --open --config webpack.dev.js"
   },
   "keywords": [],
   "author": "",
@@ -29,6 +29,7 @@
     "webpack": "^4.41.4",
     "webpack-bundle-tracker": "^0.4.3",
     "webpack-cli": "^3.3.10",
-    "webpack-dev-server": "^3.10.1"
+    "webpack-dev-server": "^3.10.1",
+    "webpack-merge": "^4.2.2"
   }
 }

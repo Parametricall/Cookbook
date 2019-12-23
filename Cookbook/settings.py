@@ -27,7 +27,7 @@ config.read('./config.ini')
 SECRET_KEY = config['Secret Key'].get("SECRET_KEY", None)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = bool(config['DEBUG'].get("DEBUG", False))
+DEBUG = config['DEBUG'].get("DEBUG", False) == "True"
 
 ALLOWED_HOSTS = ['*']
 
