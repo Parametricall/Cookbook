@@ -1,11 +1,27 @@
 <component name="ProjectDictionaryState">
   <dictionary name="Alex">
     <words>
+      <w>celerybeat</w>
       <w>corsheaders</w>
       <w>frypan</w>
+      <w>htmlcov</w>
+      <w>ipynb</w>
       <w>lconf</w>
       <w>masterfood</w>
+      <w>mkdocs</w>
+      <w>mypy</w>
+      <w>nosetests</w>
+      <w>pycache</w>
+      <w>pyenv</w>
+      <w>pytest</w>
       <w>pythonpath</w>
+      <w>ropeproject</w>
+      <w>scrapy</w>
+      <w>spyder</w>
+      <w>spyderproject</w>
+      <w>spyproject</w>
+      <w>venv</w>
+      <w>webassets</w>
     </words>
   </dictionary>
 </component>
