@@ -8,7 +8,7 @@
     "build_prod": "webpack --config webpack.prod.js",
     "launch": "webpack-dev-server --open --config webpack.dev.js"
   },
-  "keywords": [],
+  "keywords": ["heroku"],
   "author": "",
   "license": "ISC",
   "dependencies": {
@@ -31,5 +31,8 @@
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.10.1",
     "webpack-merge": "^4.2.2"
+  },
+  "engines": {
+    "node": "12.4.0"
   }
 }
