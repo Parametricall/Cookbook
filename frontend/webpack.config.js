@@ -8,10 +8,7 @@ module.exports = {
     context: __dirname,
 
     entry: './src/create_recipe.js',
-    output: {
-        path: path.resolve('./static/assets/bundles/'),
-        filename: '[name]-[hash].js',
-    },
+
 
     module: {
         rules: [

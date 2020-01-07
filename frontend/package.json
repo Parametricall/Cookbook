@@ -5,10 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build_prod": "webpack --config webpack.prod.js",
-    "launch": "webpack-dev-server --open --config webpack.dev.js"
+    "build": "webpack --config webpack.prod.js",
+    "launch": "webpack-dev-server --open --config webpack.dev.js",
+    "dev": "webpack --config webpack.dev.js",
+    "watch": "watch \"npm run dev\" src"
   },
-  "keywords": ["heroku"],
+  "keywords": [
+    "heroku"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
@@ -16,7 +20,8 @@
     "materialize-css": "^1.0.0-rc.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "regenerator-runtime": "^0.13.3"
+    "regenerator-runtime": "^0.13.3",
+    "watch": "^1.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.7.7",
