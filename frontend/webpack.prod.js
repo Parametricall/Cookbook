@@ -4,8 +4,8 @@ const path = require('path');
 
 module.exports = merge(common, {
     output: {
-        path: path.resolve('./build/'),
-        filename: 'myapp.js',
+        path: path.resolve('./static/assets/prod/'),
+        filename: 'main.js',
     },
     mode: 'production',
 });

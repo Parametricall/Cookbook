@@ -9,6 +9,8 @@ from django.views.decorators.csrf import csrf_exempt
 
 from ..forms import CreateRecipeForm
 
+from Cookbook.settings import DEBUG
+
 
 class CreateRecipe(View):
     template_name = "frontend/index.html"
@@ -28,5 +30,6 @@ class CreateRecipe(View):
         form = CreateRecipeForm()
         context = {
             'form': form,
+            'debug': DEBUG,
         }
         return render(request, self.template_name, context)
