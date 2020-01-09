@@ -1,6 +1,5 @@
 {% extends 'recipes/base.html' %}
 {% load static %}
-{#{% load render_bundle from webpack_loader %}#}
 
 {% block body %}
     <div id="errors" style="
@@ -16,9 +15,7 @@
     {% if debug == True %}
         <script src="{% static "assets/bundles/main.js" %}"></script>
     {% else %}
-        <script src="{% static "assets/build/main.js" %}"></script>
+        <script src="{% static "assets/prod/main.js" %}"></script>
     {% endif %}
-
-{#    {% render_bundle 'main' %}#}
 {% endblock body %}
 <script type="text/javascript" src="main.js"></script>

@@ -130,10 +130,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-STATICFILES_DIR = (
-    os.path.join(BASE_DIR, 'static'),
-    os.path.join(BASE_DIR, 'frontend/static/assests/build'),
-)
 
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
@@ -141,6 +137,6 @@ STATICFILES_DIR = (
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Activate Django-Heroku.
-django_heroku.settings(locals(), staticfiles=False)
+django_heroku.settings(locals())
 
 del DATABASES['default']['OPTIONS']['sslmode']
