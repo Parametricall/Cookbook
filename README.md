@@ -27,3 +27,6 @@ You must include a .env file in development. Look at .env.default for the requir
 Currently using Heroku as my web hosting provider. I have linked my account to github so every push to the Production 
 branch automatically pushes to the Heroku master branch.
 
+Make sure to run 'npm run build' and commit the generated files in fronted\static\assets\prod\ to repo. These may not be
+added to git automatically.
+
