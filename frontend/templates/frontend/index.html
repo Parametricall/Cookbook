@@ -15,6 +15,6 @@
     {% if debug == True %}
         <script src="{% static "assets/bundles/main.js" %}"></script>
     {% else %}
-        <script src="{% static "assets/build/main.js" %}"></script>
+        <script src="{% static "assets/prod/main.js" %}"></script>
     {% endif %}
 {% endblock body %}
