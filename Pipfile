@@ -13,6 +13,7 @@ django-heroku = "*"
 gunicorn = "*"
 whitenoise = "*"
 python-dotenv = "*"
+wheel = "*"
 
 [requires]
 python_version = "3.7"

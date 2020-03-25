@@ -1,0 +1,4 @@
+recursive-include recipes *
+recursive-include frontend/static *
+recursive-include frontend/templates/ *
+

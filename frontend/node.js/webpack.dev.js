@@ -4,7 +4,7 @@ const path = require('path');
 
 module.exports = merge(common, {
     output: {
-        path: path.resolve('./static/assets/bundles/'),
+        path: path.resolve('../static/assets/bundles/'),
         filename: 'main.js',
     },
     mode: 'development',
