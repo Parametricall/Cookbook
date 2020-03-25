@@ -1,5 +1,6 @@
 import ast
 
+from django.conf import settings
 from django.shortcuts import render
 from django.views import View
 
@@ -18,5 +19,6 @@ class RecipeDetails(View):
             'name': recipe.name,
             'ingredients': ingredients,
             'method': method,
+            'extended_template': settings.BASE_WITH_HEADER_TEMPLATE
         }
         return render(request, self.template_name, context)

@@ -22,7 +22,7 @@ module.exports = {
     mode: 'development',
     plugins: [
         new HtmlWebpackPlugin({
-            template: 'templates/frontend/index.html'
+            template: '../templates/frontend/index.html'
         }),
         new BundleTracker({filename: './webpack-stats.json'})
     ]

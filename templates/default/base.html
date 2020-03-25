@@ -1,0 +1,66 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+{% block authAppHeader %}
+
+<head>
+    <title>
+        Parametricall
+    </title>
+<!--Import Google Icon Font-->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    {% block head %}
+    {% endblock head %}
+</head>
+
+<body>
+
+    {% block body_header %}
+    {% endblock body_header %}
+
+    {% block body %}
+    {% endblock body %}
+
+
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+{% block scripts %}
+{% endblock scripts %}
+
+</body>
+{% endblock authAppHeader %}
+</html>
+
+
+{#<body>#}
+{#<header>#}
+{#    <nav>#}
+{#        <div class="nav-wrapper">#}
+{#            <a href="/" class="brand-logo center">auth</a>#}
+{#            <ul id="nav-mobile" class="right hide-on-med-and-down">#}
+{#                {% if user.is_authenticated %}#}
+{#                    <li><a href="{% url 'auth:profile' user.id %}">{{ user.username }}</a></li>#}
+{#                    <li><a href="{% url 'auth:create' %}">Create</a></li>#}
+{#                    <li><a href="{% url 'auth:users' %}">Table</a></li>#}
+{#                    <li><a href="{% url 'auth:logout' %}">Logout</a></li>#}
+{#                {% else %}#}
+{#                    <li><a href="{% url 'auth:login' %}">Login</a></li>#}
+{#                {% endif %}#}
+{#            </ul>#}
+{#        </div>#}
+{#    </nav>#}
+{#</header>#}
+{##}
+{#{% block content %}#}
+{#{% endblock content %}#}
+{##}
+{#<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>#}
+{##}
+{#</body>#}
+{#</html>#}

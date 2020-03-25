@@ -13,9 +13,9 @@
     <div id="root"></div>
 
     {% if debug == True %}
-        <script src="{% static "assets/bundles/main.js" %}"></script>
+        <script src="../node.js/static/assets/bundles/main.js"></script>
     {% else %}
-        <script src="{% static "assets/prod/main.js" %}"></script>
+        <script src="../node.js/static/assets/prod/main.js"></script>
     {% endif %}
 {% endblock body %}
 <script type="text/javascript" src="main.js"></script>

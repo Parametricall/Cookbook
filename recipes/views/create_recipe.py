@@ -1,5 +1,6 @@
 import json
 
+from django.conf import settings
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
@@ -31,5 +32,6 @@ class CreateRecipe(View):
         context = {
             'form': form,
             'debug': DEBUG,
+            'extended_template': settings.BASE_WITH_HEADER_TEMPLATE
         }
         return render(request, self.template_name, context)
