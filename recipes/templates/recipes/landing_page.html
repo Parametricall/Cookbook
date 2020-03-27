@@ -10,6 +10,10 @@
 
     <div class="container">
         <div class="carousel">
+            {% for post in recipes %}
+                <a class="carousel-item" href="{% url  'recipes:Recipe Details' post.id %}"><img src="{{ post.photos.url }}"
+                                                           alt="Blue box"></a>
+            {% endfor %}
             {# todo: Replace these images with images of recipes#}
             <a class="carousel-item" href="#one!"><img src="https://via.placeholder.com/150/0000FF/808080"
                                                        alt="Blue box"></a>
@@ -22,7 +26,7 @@
                     src="https://via.placeholder.com/150/000000/FFFFFF/?text=IPaddress.net" alt="Black box"></a>
         </div>
         <form method="post" action="">
-        {% csrf_token %}
+            {% csrf_token %}
             <table>
                 <thead>
                 <tr>
@@ -38,7 +42,8 @@
                         </td>
                         <td class="recipe_delete_column">
                             <label>
-                                <input type="checkbox" class="filled-in" value="{{ recipe.id }}" name="recipe_delete_checkbox"/>
+                                <input type="checkbox" class="filled-in" value="{{ recipe.id }}"
+                                       name="recipe_delete_checkbox"/>
                                 <span/>
                             </label>
                         </td>

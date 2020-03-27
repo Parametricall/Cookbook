@@ -6,5 +6,7 @@ class Recipe(models.Model):
     ingredients = models.TextField()
     method = models.TextField()
 
+    photos = models.ImageField(upload_to="recipes/", null=True)
+
     def __str__(self):
         return self.name
