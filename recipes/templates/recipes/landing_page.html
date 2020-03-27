@@ -1,6 +1,7 @@
-{% extends extended_template %}
+{% extends "recipes/base.html" %}
 
 {% block body %}
+    <!--suppress HtmlUnknownAnchorTarget, CheckEmptyScriptTag -->
     <div class="fixed-action-btn">
         <a class="btn-floating btn-large red" href="{% url 'recipes:Create Recipe' %}">
             <i class="large material-icons">add</i>
@@ -8,22 +9,59 @@
     </div>
 
     <div class="container">
-        <table>
-            <thead>
-            <tr>
-                <th>Recipes</th>
-            </tr>
-            </thead>
-
-            <tbody>
-            {% for recipe in recipes %}
+        <div class="carousel">
+            {# todo: Replace these images with images of recipes#}
+            <a class="carousel-item" href="#one!"><img src="https://via.placeholder.com/150/0000FF/808080"
+                                                       alt="Blue box"></a>
+            <a class="carousel-item" href="#two!"><img
+                    src="https://via.placeholder.com/150/FF0000/FFFFFF?Text=Down.com" alt="Red box"></a>
+            <a class="carousel-item" href="#three!"><img
+                    src="https://via.placeholder.com/150/FFFF00/000000?Text=WebsiteBuilders.com"
+                    alt="Yellow box"></a>
+            <a class="carousel-item" href="#four!"><img
+                    src="https://via.placeholder.com/150/000000/FFFFFF/?text=IPaddress.net" alt="Black box"></a>
+        </div>
+        <form method="post" action="">
+        {% csrf_token %}
+            <table>
+                <thead>
                 <tr>
-                    <td>
-                        <a href="{% url  'recipes:Recipe Details' recipe.id %}">{{ recipe.name }}</a>
+                    <th>Recipes</th>
+                    <th/>
+                </tr>
+                </thead>
+                <tbody>
+                {% for recipe in recipes %}
+                    <tr>
+                        <td>
+                            <a href="{% url  'recipes:Recipe Details' recipe.id %}">{{ recipe.name }}</a>
+                        </td>
+                        <td class="recipe_delete_column">
+                            <label>
+                                <input type="checkbox" class="filled-in" value="{{ recipe.id }}" name="recipe_delete_checkbox"/>
+                                <span/>
+                            </label>
+                        </td>
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <td/>
+                    <td class="recipe_delete_column">
+                        <button class="btn waves-effect waves-light" type="submit" name="action">Delete
+                            <i class="material-icons right">send</i>
+                        </button>
                     </td>
                 </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </form>
     </div>
+
+    <!--suppress JSUnresolvedVariable, ES6ModulesDependencies -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            let elements = document.querySelectorAll('.carousel');
+            M.Carousel.init(elements);
+        });
+    </script>
 {% endblock body %}
