@@ -14,6 +14,7 @@ gunicorn = "*"
 whitenoise = "*"
 python-dotenv = "*"
 wheel = "*"
+pillow = "*"
 
 [requires]
 python_version = "3.7"

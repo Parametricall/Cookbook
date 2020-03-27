@@ -10,6 +10,7 @@ from ..models import Recipe
 
 class LandingPage(View):
     template_name = "recipes/landing_page.html"
+    model = Recipe
 
     def get(self, request):
         formset = modelformset_factory(Recipe, fields=("name",),
