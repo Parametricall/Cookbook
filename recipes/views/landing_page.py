@@ -29,5 +29,9 @@ class LandingPage(View):
             recipe = Recipe.objects.get(id=recipe_id)
             recipe.delete()
 
+        for key in request.FILES:
+            recipe = Recipe.objects.get(id=int(key))
+            recipe.photos = request.FILES[key]
+            recipe.save()
         return HttpResponseRedirect(reverse('recipes:Landing Page'))
 
