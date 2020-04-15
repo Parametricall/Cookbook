@@ -10,22 +10,15 @@
 
     <div class="container">
         <div class="carousel">
-            {% for post in recipes %}
-                <a class="carousel-item" href="{% url  'recipes:Recipe Details' post.id %}"><img src="{{ post.photos.url }}"
-                                                           alt="Blue box"></a>
+            {% for recipe in recipes %}
+                {% if recipe.photos %}
+                    <a class="carousel-item" href="{% url  'recipes:Recipe Details' recipe.id %}"><img
+                            src="{{ recipe.photos.url }}"
+                            alt="Blue box"></a>
+                {% endif %}
             {% endfor %}
-            {# todo: Replace these images with images of recipes#}
-            <a class="carousel-item" href="#one!"><img src="https://via.placeholder.com/150/0000FF/808080"
-                                                       alt="Blue box"></a>
-            <a class="carousel-item" href="#two!"><img
-                    src="https://via.placeholder.com/150/FF0000/FFFFFF?Text=Down.com" alt="Red box"></a>
-            <a class="carousel-item" href="#three!"><img
-                    src="https://via.placeholder.com/150/FFFF00/000000?Text=WebsiteBuilders.com"
-                    alt="Yellow box"></a>
-            <a class="carousel-item" href="#four!"><img
-                    src="https://via.placeholder.com/150/000000/FFFFFF/?text=IPaddress.net" alt="Black box"></a>
         </div>
-        <form method="post" action="">
+        <form method="post" action="" enctype="multipart/form-data">
             {% csrf_token %}
             <table>
                 <thead>
@@ -40,19 +33,26 @@
                         <td>
                             <a href="{% url  'recipes:Recipe Details' recipe.id %}">{{ recipe.name }}</a>
                         </td>
+                        <td>
+                            <label>
+                                <input style="display: none" type="file" name="{{ recipe.id }}" value="{{ recipe.id }}">
+                                <i class="material-icons right" style="font-size: xx-large; color: orange">add_photo_alternate</i>
+                            </label>
+                        </td>
                         <td class="recipe_delete_column">
                             <label>
                                 <input type="checkbox" class="filled-in" value="{{ recipe.id }}"
                                        name="recipe_delete_checkbox"/>
-                                <span/>
+                                <span>delete</span>
                             </label>
                         </td>
                     </tr>
                 {% endfor %}
                 <tr>
-                    <td/>
+                    <td></td>
+                    <td></td>
                     <td class="recipe_delete_column">
-                        <button class="btn waves-effect waves-light" type="submit" name="action">Delete
+                        <button class="btn waves-effect waves-light" type="submit" name="action">Submit
                             <i class="material-icons right">send</i>
                         </button>
                     </td>
