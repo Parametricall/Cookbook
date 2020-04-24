@@ -8,6 +8,8 @@ import EditRecipeForm from "./EditRecipeForm";
 require("regenerator-runtime/runtime");
 
 function FormSelector(app, data) {
+    window.csrdToken = data.csrf_token || undefined;
+
     let components = {
         "CreateRecipeForm": <CreateRecipeForm data={data}/>,
         "EditRecipeForm": <EditRecipeForm data={data}/>

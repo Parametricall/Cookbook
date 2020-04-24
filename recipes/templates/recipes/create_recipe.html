@@ -6,7 +6,9 @@
         (function () {
             Cookbook.FormSelector(
                 appName = "CreateRecipeForm",
-                data = "{{ test }}"
+                data = {
+                    "csrf_token": "{{ csrf_token }}"
+                }
             );
         })();
     </script>

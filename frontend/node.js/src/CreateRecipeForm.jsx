@@ -55,13 +55,20 @@ class Ingredients extends React.Component {
                 id={i}/>
         }
 
-        return (
-            <label>
-                Ingredients:
-                {rows}
-                <span style={{color: "red"}}>
+        let errors;
+        if (this.props.errors) {
+            errors = (
+                 <span style={{color: "red"}}>
                     errors: {this.props.errors}
                 </span>
+            )
+        }
+
+        return (
+            <label>
+                <h4>Ingredients</h4>
+                {rows}
+                {errors}
             </label>
         )
     }
@@ -113,14 +120,20 @@ class Method extends React.Component {
                 placeholder={"Add method #" + (i+1)}
                 id={i}/>
         }
+        let errors;
+        if (this.props.errors) {
+            errors = (
+                 <span style={{color: "red"}}>
+                    errors: {this.props.errors}
+                </span>
+            )
+        }
 
         return (
             <label>
-                Method:
+                <h4>Method</h4>
                 {rows}
-                <span style={{color: "red"}}>
-                    errors: {this.props.errors}
-                </span>
+                {errors}
             </label>
         )
     }
@@ -162,8 +175,6 @@ class CreateRecipeForm extends React.Component {
             ingredients: this.state.ingredients,
             method: this.state.method,
         };
-        // ret_data.ingredients.pop();
-        // ret_data.method.pop();
         await postData('', ret_data)
             .then((response) => {
                 if (response.status > 400) {
@@ -204,14 +215,19 @@ class CreateRecipeForm extends React.Component {
         return (
             <div className="container">
                 <form onSubmit={this.handleSubmit} method="POST">
-                    <label>
-                        Name:
-                        <input
-                            name="name"
-                            type="text"
-                            value={this.state.name}
-                            onChange={this.handleChange}/>
-                    </label>
+                    <input
+                        style={{
+                            width: "100%",
+                            height: "9rem",
+                            lineHeight: "110%",
+                            fontSize: "4.2rem",
+                            color: "black",
+                        }}
+                        onChange={this.handleChange}
+                        value={this.state.name}
+                        placeholder="Enter name here"
+                        name="name"
+                    />
                     <br/>
                     <Ingredients ingredients={this.state.ingredients} get_data={this.getData}
                                  errors={ingredient_errors}/>

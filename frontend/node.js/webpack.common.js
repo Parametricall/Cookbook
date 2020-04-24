@@ -1,4 +1,3 @@
-const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const BundleTracker = require('webpack-bundle-tracker');
 
@@ -9,8 +8,6 @@ module.exports = {
     entry: './src/FormSelector.jsx',
     output: {
         library: "Cookbook",
-        path: path.resolve('./static/assets/bundles/'),
-        filename: '[name]-[hash].js',
     },
     module: {
         rules: [{
