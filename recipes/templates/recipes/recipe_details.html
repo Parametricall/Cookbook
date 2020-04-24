@@ -4,14 +4,13 @@
 
     <script>
         (function () {
-            var ingredients = "{{ ingredients }}";
-
             Cookbook.FormSelector(
                 appName = "EditRecipeForm",
                 data = {
                     "recipeName": "{{recipeName}}",
                     "ingredients": JSON.parse({{ ingredients| safe}}),
                     "method": JSON.parse({{ method| safe}}),
+                    "csrf_token": "{{ csrf_token }}"
                 }
             );
         })();

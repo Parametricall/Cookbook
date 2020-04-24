@@ -17,10 +17,6 @@ from Cookbook.settings import DEBUG
 class CreateRecipe(View):
     template_name = "recipes/create_recipe.html"
 
-    @method_decorator(csrf_exempt)
-    def dispatch(self, *args, **kwargs):
-        return super().dispatch(*args, **kwargs)
-
     def post(self, request):
         body = json.loads(request.body)
         form = CreateRecipeForm(body)
@@ -34,8 +30,7 @@ class CreateRecipe(View):
     def get(self, request):
         form = CreateRecipeForm()
         context = {
-            "test": "hello world",
-            # 'form': form,
+            "form": form,
             'debug': DEBUG,
             'extended_template': settings.BASE_WITH_HEADER_TEMPLATE
         }

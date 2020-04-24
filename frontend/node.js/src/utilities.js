@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 
 async function postData(url = '', data = {}) {
 
-    let csrftoken = Cookies('csrftoken');
+    let csrftoken = window.csrdToken;
     // Default options are marked with *
     const response = await fetch(url, {
         method: 'POST', // *GET, POST, PUT, DELETE, etc.

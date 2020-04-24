@@ -135,11 +135,12 @@ function EditRecipeForm(props) {
             continue;
         }
         let id = "method-" + i;
+        let value = methodCount + ". " + method[i];
         methodRows[i] = <input
             key={id}
             name="method"
             type="text"
-            value={method[i]}
+            value={value}
             onChange={handleMethodChange}
             id={id}
             disabled={!editMode}
