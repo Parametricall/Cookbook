@@ -25,6 +25,8 @@ if os.path.isfile(dotenv_file):
 
 SECRET_KEY = "kjfghkldfsg"
 
+ALLOWED_HOSTS = ["*"]
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG", False) == "True"

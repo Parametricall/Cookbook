@@ -1,11 +1,13 @@
-{% extends extended_template %}
+{% extends 'frontend/index.html' %}
 
-{% block body %}
-    <div class="container">
-        <form action="" method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit" value="Submit">
-        </form>
-    </div>
-{% endblock body %}
+{% block sub-body %}
+
+    <script>
+        (function () {
+            Cookbook.FormSelector(
+                appName = "CreateRecipeForm",
+                data = "{{ test }}"
+            );
+        })();
+    </script>
+{% endblock sub-body %}
