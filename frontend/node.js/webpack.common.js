@@ -6,20 +6,25 @@ const BundleTracker = require('webpack-bundle-tracker');
 module.exports = {
     context: __dirname,
 
-    entry: './src/create_recipe.js',
+    entry: './src/FormSelector.jsx',
     output: {
+        library: "Cookbook",
         path: path.resolve('./static/assets/bundles/'),
         filename: '[name]-[hash].js',
     },
-
     module: {
-        rules: [
-            {test: /\.(js)$/, use: 'babel-loader'},
+        rules: [{
+            test: /\.jsx?$/,
+            exclude: /node_modules/,
+            loader: 'babel-loader',
+        },
             {test: /\.(css)$/, use: ['style-loader', 'css-loader']}
-        ]
-    },
+        ],
 
-    mode: 'development',
+    },
+    resolve: {
+            extensions: ['.jsx', '.js']
+        },
     plugins: [
         new HtmlWebpackPlugin({
             template: '../templates/frontend/index.html'

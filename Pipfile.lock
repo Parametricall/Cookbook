@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "82cb46c612b7426f5099223d7bd1c2565fb808ac44ef85a746355c048722d895"
+            "sha256": "59e785db625a0738303c17b3349c427b59a14ccb756a5c120138ecab5466e299"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -22,6 +22,10 @@
                 "sha256:9ca8b952a0a9afa61d30aa6d3d9b570bb3fd6bafcf7ec9e6bed43b936133db1c"
             ],
             "version": "==3.2.7"
+        },
+        "cookbook": {
+            "editable": true,
+            "path": "."
         },
         "dj-database-url": {
             "hashes": [
@@ -95,7 +99,6 @@
                 "sha256:da737ab273f4d60ae552f82ad83f7cbd0e173ca30ca20b160f708c92742ee212",
                 "sha256:eb84e7e5b07ff3725ab05977ac56d5eeb0c510795aeb48e8b691491be3c5745b"
             ],
-            "index": "pypi",
             "version": "==7.1.1"
         },
         "psycopg2": {

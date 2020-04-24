@@ -17,4 +17,7 @@
     {% else %}
         <script src="{% static "assets/prod/main.js" %}"></script>
     {% endif %}
+
+    {% block sub-body %}
+    {% endblock sub-body %}
 {% endblock body %}

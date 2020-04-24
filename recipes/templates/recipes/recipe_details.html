@@ -1,18 +1,42 @@
-{% extends extended_template %}
+{% extends 'frontend/index.html' %}
 
-{% block body %}
-    <div class="container">
-        <h2 style="text-align: center">{{ name }}</h2>
-        <h4>Ingredients</h4>
-        <ul class="collection">
-            {% for ingredient in ingredients %}
-                <li class="collection-item">{{ ingredient }}</li>
-            {% endfor %}
-        </ul>
-        <h4>Method</h4>
-        {% for instruction in method %}
-            {{ forloop.counter }}. {{ instruction }}
-            <br/>
-        {% endfor %}
-    </div>
-{% endblock body %}
+{% block sub-body %}
+
+    <script>
+        (function () {
+            var ingredients = "{{ ingredients }}";
+
+            Cookbook.FormSelector(
+                appName = "EditRecipeForm",
+                data = {
+                    "recipeName": "{{recipeName}}",
+                    "ingredients": JSON.parse({{ ingredients| safe}}),
+                    "method": JSON.parse({{ method| safe}}),
+                }
+            );
+        })();
+    </script>
+{% endblock sub-body %}
+
+
+
+
+
+{#{% extends extended_template %}#}
+{##}
+{#{% block body %}#}
+{#    <div class="container">#}
+{#        <h2 style="text-align: center">{{ name }}</h2>#}
+{#        <h4>Ingredients</h4>#}
+{#        <ul class="collection">#}
+{#            {% for ingredient in ingredients %}#}
+{#                <li class="collection-item">{{ ingredient }}</li>#}
+{#            {% endfor %}#}
+{#        </ul>#}
+{#        <h4>Method</h4>#}
+{#        {% for instruction in method %}#}
+{#            {{ forloop.counter }}. {{ instruction }}#}
+{#            <br/>#}
+{#        {% endfor %}#}
+{#    </div>#}
+{#{% endblock body %}#}

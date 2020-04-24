@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Cookies from 'js-cookie'
 import "materialize-css/dist/css/materialize.min.css";
+
 require("regenerator-runtime/runtime");
+
+import {postData, getData} from './utilities';
 
 
 class Ingredients extends React.Component {
@@ -36,7 +38,11 @@ class Ingredients extends React.Component {
     }
 
     render() {
-        let ingredients = this.state.ingredients;
+        let ingredients = this.props.ingredients;
+        if (ingredients.length === 0) {
+            ingredients = [""];
+        }
+
         let rows = [];
         for (let i = 0; i < ingredients.length; i++) {
             rows[i] = <input
@@ -53,13 +59,16 @@ class Ingredients extends React.Component {
             <label>
                 Ingredients:
                 {rows}
+                <span style={{color: "red"}}>
+                    errors: {this.props.errors}
+                </span>
             </label>
         )
     }
 }
 
 class Method extends React.Component {
-     constructor(props) {
+    constructor(props) {
         super(props);
         this.state = {
             method: [
@@ -89,7 +98,10 @@ class Method extends React.Component {
     }
 
     render() {
-        let method = this.state.method;
+        let method = this.props.method;
+        if (method.length === 0){
+            method = [""];
+        }
         let rows = [];
         for (let i = 0; i < method.length; i++) {
             rows[i] = <input
@@ -106,6 +118,9 @@ class Method extends React.Component {
             <label>
                 Method:
                 {rows}
+                <span style={{color: "red"}}>
+                    errors: {this.props.errors}
+                </span>
             </label>
         )
     }
@@ -116,8 +131,9 @@ class CreateRecipeForm extends React.Component {
         super(props);
         this.state = {
             name: "",
-            ingredients: [],
-            method: [],
+            ingredients: [""],
+            method: [""],
+            errors: {},
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -146,10 +162,28 @@ class CreateRecipeForm extends React.Component {
             ingredients: this.state.ingredients,
             method: this.state.method,
         };
-        ret_data.ingredients.pop();
-        ret_data.method.pop();
-        const data = await postData('', ret_data);
-        window.location.href = data.url;
+        // ret_data.ingredients.pop();
+        // ret_data.method.pop();
+        await postData('', ret_data)
+            .then((response) => {
+                if (response.status > 400) {
+                    return {placeholder: "Something went wrong!"}
+                } else if (response.url) {
+                    window.location.href = response.url
+                } else {
+                    return response.json();
+                }
+
+            })
+            .then((data) => {
+                    if ("errors" in data) {
+                        let errors = data["errors"];
+                        this.setState({
+                            errors: errors,
+                        })
+                    }
+                }
+            )
     };
 
     getData(name, value) {
@@ -159,6 +193,14 @@ class CreateRecipeForm extends React.Component {
     }
 
     render() {
+        let ingredient_errors, method_errors;
+        if (this.state.errors) {
+            let errors = this.state.errors;
+            ingredient_errors = errors["ingredients"];
+            method_errors = errors["method"];
+        }
+
+
         return (
             <div className="container">
                 <form onSubmit={this.handleSubmit} method="POST">
@@ -170,9 +212,14 @@ class CreateRecipeForm extends React.Component {
                             value={this.state.name}
                             onChange={this.handleChange}/>
                     </label>
-                    <br />
-                    <Ingredients get_data={this.getData}/>
-                    <Method get_data={this.getData}/>
+                    <br/>
+                    <Ingredients ingredients={this.state.ingredients} get_data={this.getData}
+                                 errors={ingredient_errors}/>
+                    <br/>
+                    <Method method={this.state.method} get_data={this.getData}
+                            errors={method_errors}/>
+                    <br/>
+                    <br/>
 
                     <button className="btn waves-effect waves-light" type="submit" name="action">
                         Submit
@@ -184,29 +231,5 @@ class CreateRecipeForm extends React.Component {
     }
 }
 
-async function postData(url = '', data = {}) {
 
-    let csrftoken = Cookies('csrftoken');
-    // Default options are marked with *
-    const response = await fetch(url, {
-        method: 'POST', // *GET, POST, PUT, DELETE, etc.
-        mode: 'cors', // no-cors, *cors, same-origin
-        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-        credentials: 'same-origin', // include, *same-origin, omit
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRFToken': csrftoken
-        },
-        redirect: 'follow', // manual, *follow, error
-        referrer: 'no-referrer', // no-referrer, *client
-        body: JSON.stringify(data) // body data type must match "Content-Type" header
-    });
-    console.log(response);
-    return await response; // parses JSON response into native JavaScript objects
-}
-
-
-ReactDOM.render(
-    <CreateRecipeForm/>,
-    document.getElementById('root')
-);
+export default CreateRecipeForm
