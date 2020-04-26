@@ -45,5 +45,5 @@ class Migration(migrations.Migration):
             ],
         ),
 
-        migrations.RunPython(create_initial_recipe)
+        # migrations.RunPython(create_initial_recipe)
     ]
