@@ -15,6 +15,7 @@ whitenoise = "*"
 python-dotenv = "*"
 wheel = "*"
 cookbook = {editable = true,path = "."}
+dj-database-url = "*"
 
 [requires]
 python_version = "3.7"

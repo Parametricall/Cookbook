@@ -24,7 +24,14 @@ setup(
     include_package_data=True,
     install_requires=[
         'django>=3.0.2',
-        "pillow"
+        "pillow",
+        "django-cors-headers>= 3.2.1",
+        "django-heroku>=0.3.1",
+        "gunicorn>=20.0.4",
+        "whitenoise>=5.0.1",
+        "python-dotenv>=0.13.0",
+        "dj-database-url>=0.5.0",
+        "django-webpack-loader>=0.7.0"
     ],
     classifiers=[
         "Programming Language :: Python",
