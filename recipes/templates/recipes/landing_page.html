@@ -10,14 +10,14 @@
 
     <div class="container">
         <div class="carousel">
-            {% for recipe in recipes %}
-                {% if recipe.photos %}
-                    <a class="carousel-item" href="{% url  'recipes:Recipe Details' recipe.id %}"><img
-                            src="{{ recipe.photos.url }}"
-                            alt="Blue box"></a>
-                {% endif %}
-            {% endfor %}
-        </div>
+{#            {% for recipe in recipes %}#}
+{#                {% if recipe.photos %}#}
+{#                    <a class="carousel-item" href="{% url  'recipes:Recipe Details' recipe.id %}"><img#}
+{#                            src="{{ recipe.photos.url }}"#}
+{#                            alt="Blue box"></a>#}
+{#                {% endif %}#}
+{#            {% endfor %}#}
+{#        </div>#}
         <form method="post" action="" enctype="multipart/form-data">
             {% csrf_token %}
             <table>
@@ -30,6 +30,14 @@
                 <tbody>
                 {% for recipe in recipes %}
                     <tr>
+                        <td>
+                            {% if recipe.photos %}
+                                <a href="{% url  'recipes:Recipe Details' recipe.id %}"><img
+                                        style="width: 15%; height: auto"
+                                        src="{{ recipe.photos.url }}"
+                                        alt="Blue box"></a>
+                            {% endif %}
+                        </td>
                         <td>
                             <a href="{% url  'recipes:Recipe Details' recipe.id %}">{{ recipe.name }}</a>
                         </td>
@@ -48,15 +56,15 @@
                         </td>
                     </tr>
                 {% endfor %}
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td class="recipe_delete_column">
-                        <button class="btn waves-effect waves-light" type="submit" name="action">Submit
-                            <i class="material-icons right">send</i>
-                        </button>
-                    </td>
-                </tr>
+{#                <tr>#}
+{#                    <td></td>#}
+{#                    <td></td>#}
+{#                    <td class="recipe_delete_column">#}
+{#                        <button class="btn waves-effect waves-light" type="submit" name="action">Submit#}
+{#                            <i class="material-icons right">send</i>#}
+{#                        </button>#}
+{#                    </td>#}
+{#                </tr>#}
                 </tbody>
             </table>
         </form>

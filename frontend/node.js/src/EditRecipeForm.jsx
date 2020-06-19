@@ -5,10 +5,12 @@ import {postData} from "./utilities";
 function EditRecipeForm(props) {
     let data = props.data;
     console.log("Data: ", data);
+    const photo_url = data["photo_url"]
     const [recipeName, setRecipeName] = useState(data.recipeName)
     const [ingredients, setIngredients] = useState(data.ingredients)
     const [method, setMethod] = useState(data.method)
     const [editMode, setEditMode] = useState(false)
+    const [image, newImage] = useState(null);
 
     function handleRecipeNameChange(event) {
         const newName = event.target.value;
@@ -30,6 +32,7 @@ function EditRecipeForm(props) {
             return newState;
         })
     }
+
     function addNewIngredient(event) {
         const {id, value} = event.target;
         setIngredients((original) => {
@@ -73,6 +76,7 @@ function EditRecipeForm(props) {
             name: recipeName,
             ingredients: ingredients,
             method: method,
+            image: image,
         };
         await postData('', ret_data)
             .then((response) => {
@@ -94,6 +98,11 @@ function EditRecipeForm(props) {
                     }
                 }
             )
+    }
+
+    function uploadNewPhoto(e) {
+        let image = e.target.value;
+        newImage(image)
     }
 
     function toggleEditMode() {
@@ -135,27 +144,28 @@ function EditRecipeForm(props) {
             continue;
         }
         let id = "method-" + i;
-        let value = methodCount + ". " + method[i];
-        methodRows[i] = <input
-            key={id}
-            name="method"
-            type="text"
-            value={value}
-            onChange={handleMethodChange}
-            id={id}
-            disabled={!editMode}
-            style={{
-                color: "black",
-                borderBottom: "1px solid black"
-            }}
-        />
+        let value = method[i];
+        methodRows[i] = (<li key={id}><input
+                key={id}
+                name="method"
+                type="text"
+                value={value}
+                onChange={handleMethodChange}
+                id={id}
+                disabled={!editMode}
+                style={{
+                    color: "black",
+                    borderBottom: "1px solid black"
+                }}
+            />
+            </li>
+        )
         methodCount++;
     }
 
     if (editMode) {
         let methodId = "method-" + method.length;
         let ingredientId = "ingredient-" + ingredients.length;
-
 
 
         recipeRows.push(
@@ -174,7 +184,7 @@ function EditRecipeForm(props) {
             />
         )
         methodRows.push(
-            <input
+            <li key={methodId}><input
                 key={methodId}
                 name="method"
                 type="text"
@@ -187,50 +197,62 @@ function EditRecipeForm(props) {
                 }}
                 placeholder={"Add method #" + (methodCount)}
             />
+            </li>
         )
     }
 
-    let FAB;
+    let FAB, header, imageEdit;
     if (editMode) {
         FAB = "save";
+        header = <label>header<input
+            onChange={handleRecipeNameChange}
+            value={recipeName}
+        />
+        </label>
+        imageEdit = (
+            <div className="input-field">
+                {/*<i className="material-icons left prefix">edit</i>*/}
+                <input onChange={uploadNewPhoto} type="file" id="image"/>
+            </div>);
     } else {
         FAB = "mode_edit";
+        header = <h4>{recipeName}</h4>
     }
 
     return (
         <React.Fragment>
-            <div className="container">
-                <form>
-                    <input
-                        style={{
-                            width: "100%",
-                            height: "9rem",
-                            lineHeight: "110%",
-                            fontSize: "4.2rem",
-                            borderBottom: "none",
-                            color: "black",
-                        }}
-                        onChange={handleRecipeNameChange}
-                        value={recipeName}
-                        disabled={!editMode}
-                    />
-                    <br/>
-                    <label>
-                        <h4>Ingredients</h4>
-                        {recipeRows}
-                    </label>
-                    <br/>
-                    <label>
-                        <h4>Method</h4>
-                        {methodRows}
-                    </label>
-                </form>
+            <div className="row">
+                <div className="col s12 m2">
+                    <div className="container">
+                    <img src={photo_url} alt={recipeName} style={{"maxWidth": "250px", "paddingTop": "25px"}}/>
+                        {imageEdit}
+                    </div>
+                </div>
+                <div className="col s12 m8">
+                    <div className="container">
+                        <form>
+                            {header}
+                            <br/>
+                            <label>
+                                <h4>Ingredients</h4>
+                                {recipeRows}
+                            </label>
+                            <br/>
+                            <label>
+                                <h4>Method</h4>
+                                <ol style={{paddingLeft: "0px"}}>
+                                    {methodRows}
+                                </ol>
+                            </label>
+                        </form>
 
-            </div>
-            <div className="fixed-action-btn">
-                <a className="btn-floating btn-large red" onClick={toggleEditMode}>
-                    <i className="large material-icons">{FAB}</i>
-                </a>
+                    </div>
+                    <div className="fixed-action-btn">
+                        <a className="btn-floating btn-large red" onClick={toggleEditMode}>
+                            <i className="large material-icons">{FAB}</i>
+                        </a>
+                    </div>
+                </div>
             </div>
         </React.Fragment>
     )

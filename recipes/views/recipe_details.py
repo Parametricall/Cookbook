@@ -24,7 +24,8 @@ class RecipeDetails(View):
             'recipeName': recipe.name,
             'ingredients': repr(json.dumps(ingredients)),
             'method': repr(json.dumps(method)),
-            'extended_template': settings.BASE_WITH_HEADER_TEMPLATE
+            'extended_template': settings.BASE_WITH_HEADER_TEMPLATE,
+            "photo_url": recipe.photos.url
         }
         return render(request, self.template_name, context)
 

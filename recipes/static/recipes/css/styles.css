@@ -1,3 +1,7 @@
 .recipe_delete_column {
     text-align: end;
 }
+
+.nav {
+    background-color: white !important;
+}
